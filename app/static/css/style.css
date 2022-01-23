@@ -1,0 +1,198 @@
+body {
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container1 {
+  border: blue solid 0.5rem;
+  width: 99%;
+  height: 95vh;
+  border-radius: 16px;
+}
+
+.container1 .blocks {
+  padding-top: 5rem;
+}
+
+/*Container 1 STARTS here.*/
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0.3rem;
+  position: fixed;
+  background-color: blue;
+  border-radius: 16px;
+  height: 4.5rem;
+  color: white;
+}
+
+nav .logo {
+  width: 16rem;
+  height: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 0.6rem;
+  padding-left: 1rem;
+}
+
+nav .logo img {
+  height: 2.8rem;
+  width: 2rem;
+  padding-left: 1rem;
+}
+
+nav .logo .text {
+  margin-top: 0.6rem;
+  margin-left: 1rem;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 42.5rem;
+  padding-right: 1rem;
+}
+
+nav ul li {
+  margin: 10px;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+}
+
+/*Blocks*/
+.blocks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 75vh;
+}
+
+.blocks .block1 {
+  width: 50%;
+  margin-top: 7rem;
+}
+
+.blocks .block1 .texts {
+  margin-left: 7rem;
+  margin-top: -1.5rem;
+  position: relative;
+}
+
+.blocks .block1 .texts .text1 {
+  font-size: 50px;
+  width: 50rem;
+}
+
+.blocks .block1 .texts .text2 {
+  font-size: 45px;
+  margin-left: 2.2rem;
+  margin-top: 1rem;
+}
+
+.blocks .block1 .texts button {
+  font-size: 2rem;
+  width: 10rem;
+  border-radius: 16px;
+  background-color: blue;
+  color: #fff;
+  margin-left: 8rem;
+  margin-top: 4rem;
+}
+
+.blocks .block2 {
+  width: 50%;
+  margin-left: 5%;
+}
+
+.blocks .block2 img {
+  width: 38rem;
+}
+
+/*Container 2 STARTS here.*/
+.login_blocks {
+  margin-top: 7.5rem;
+  width: 75%;
+  height: 75vh;
+  margin-left: 10rem;
+  border: 3.5px solid black;
+  border-radius: 16px;
+}
+
+.block1 .container {
+  margin-top: 3rem;
+  margin-left: 2rem;
+  width: 29rem;
+  height: 23.4rem;
+  border: blue solid 5px;
+  border-radius: 16px;
+}
+
+.block1 .container .htext {
+  font-size: 35px;
+  margin-left: 7.5rem;
+  margin-top: 3rem;
+  width: 30rem;
+}
+
+.block1 .container .inputs {
+  margin-top: 2rem;
+  margin-left: 1.8rem;
+}
+
+.block1 .container .inputs input {
+  width: 25rem;
+  height: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.block1 .container .extras {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -0.5rem;
+  font-size: 1.1rem;
+}
+
+.block1 .container .extras h5 {
+  padding-left: 5rem;
+}
+
+.block1 .container .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 2.5rem;
+}
+
+.block1 .container .buttons button {
+  width: 9rem;
+  height: 2.2rem;
+  margin-left: 2rem;
+}
+
+.tblock2 img {
+  width: 430px;
+  height: 23.5rem;
+  border-radius: 25px;
+  margin-left: 2rem;
+  margin-top: 3rem;
+}
+/*# sourceMappingURL=style.css.map */

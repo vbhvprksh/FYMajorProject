@@ -6,10 +6,99 @@
   <title>Pan Card Tampering</title>
 
   <!-- CSS  -->
-  <link href="./static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 
 <body>
+<!-----MY APP STARTS Here-->
+
+
+
+<!----Navbar and Home here-->
+<section >
+  <div class="container1">
+    <!----Navbar-->
+
+      <nav>
+          <div class="logo">
+              <div class="img">
+                  <img src="{{url_for('static', filename='images/logo.png')}}">
+              </div>
+              <div class="text">
+                      User Document
+                  <br>
+                  Verification Portal
+              </div>
+          </div>
+          <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Conatct</a></li>
+              <li><a href="#">Blog</a></li>
+          </ul>
+      </nav>
+      <!----Home-->
+      <div class="blocks">
+          <div class="block1">
+              <div class="texts">
+                  <div class="text1">
+                      Get Your Documents
+                  </div>
+                  <div class="text2">
+                      Verified Physcially
+                  </div>
+                  <button href="{{url_for('login')}}">Login</button>
+              </div>
+          </div>
+
+          <div class="block2">
+              <img src="{{url_for('static', filename='images/1.png')}}">
+          </div>
+
+      </div>
+  </div>
+</section>
+
+
+<!----Login and Signup here-->
+
+<section class="login_blocks">
+  <div class="block1">
+      <div class="container">
+          <div class="htext">
+              Welcome Back
+          </div>
+
+          <div class="inputs">
+              <input placeholder="Enter email"><br>
+              <input placeholder="Enter password">
+          </div>
+
+          <div class="extras">
+              <h5>Remember me</h5>
+              <h5>Forgot Password ??</h5>
+          </div>
+
+          <div class="buttons">
+              <button>Login</button>
+              <button>Sign up</button>
+          </div>
+
+      </div>
+  </div>
+
+
+  <div class="tblock2">
+      <img src="{{url_for('static', filename='images/2.png')}}">
+  </div>
+</section>
+
+
+
+
+
+
+<!-----MY APP ENDS Here-->
   <nav style="background-color: #5e72e4" class="lighten-1"  role="navigation" style="height: 100px">
     <div class="nav-wrapper container">
       <a id="logo-container" class="brand-logo center"><h5>Pan Card Tampering</h5></a>

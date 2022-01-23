@@ -1,4 +1,5 @@
 # Important imports
+from django.shortcuts import render
 from app import app
 from flask import request, render_template
 import os
@@ -11,6 +12,11 @@ from PIL import Image
 app.config['INITIAL_FILE_UPLOADS'] = 'app/static/uploads'
 app.config['EXISTNG_FILE'] = 'app/static/original'
 app.config['GENERATED_FILE'] = 'app/static/generated'
+
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
 
 # Route to home page
 @app.route("/", methods=["GET", "POST"])
