@@ -1,178 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Pan Card Tampering</title>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Document Verification Portal</title>
+
+    <!-- CSS  -->
+    
+    <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
 
   <!-- CSS  -->
-  <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 
 <body>
-<!-----MY APP STARTS Here-->
-
-
-
-<!----Navbar and Home here-->
+  <!----Vaibhav -->
 <section >
-  <div class="container1">
+    <div class="container1">
     <!----Navbar-->
 
-      <nav>
-          <div class="logo">
-              <div class="img">
-                  <img src="{{url_for('static', filename='images/logo.png')}}">
-              </div>
-              <div class="text">
-                      User Document
-                  <br>
-                  Verification Portal
-              </div>
-          </div>
-          <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Conatct</a></li>
-              <li><a href="#">Blog</a></li>
-          </ul>
-      </nav>
-      <!----Home-->
-      <div class="blocks">
-          <div class="block1">
-              <div class="texts">
-                  <div class="text1">
-                      Get Your Documents
-                  </div>
-                  <div class="text2">
-                      Verified Physcially
-                  </div>
-                  <button href="{{url_for('login')}}">Login</button>
-              </div>
-          </div>
-
-          <div class="block2">
-              <img src="{{url_for('static', filename='images/1.png')}}">
-          </div>
-
-      </div>
-  </div>
-</section>
-
-
-<!----Login and Signup here-->
-
-<section class="login_blocks">
-  <div class="block1">
-      <div class="container">
-          <div class="htext">
-              Welcome Back
-          </div>
-
-          <div class="inputs">
-              <input placeholder="Enter email"><br>
-              <input placeholder="Enter password">
-          </div>
-
-          <div class="extras">
-              <h5>Remember me</h5>
-              <h5>Forgot Password ??</h5>
-          </div>
-
-          <div class="buttons">
-              <button>Login</button>
-              <button>Sign up</button>
-          </div>
-
-      </div>
-  </div>
-
-
-  <div class="tblock2">
-      <img src="{{url_for('static', filename='images/2.png')}}">
-  </div>
+    <nav>
+        <div class="logo">
+            <div class="img">
+                <img src="{{url_for('static', filename='images/logo.png')}}">
+            </div>
+            <div class="text">
+                User Document
+                <br>
+                Verification Portal
+            </div>
+        </div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="/blogs">Blog</a></li>
+        </ul>
+    </nav>
+    <!----Home-->
+    <div class="blocks">
+        <div class="block1">
+            <div class="texts">
+                <div class="text1">
+                    Get Your Documents
+                </div>
+                <div class="text2">
+                    Verified Physcially
+                </div>
+                <a href="/login"><button>Login</button></a>
+                </div>
+            </div>
+        <div class="block2">
+            <img src="{{url_for('static', filename='images/1.png')}}">
+        </div>
+        </div>
+    </div>
 </section>
 
 
 
+<!---------ABOUT SECTION BEGINS HERE---->
+<section id="about">
+  
+  
+  <div class="about-blocks">
+    <div class="about-block1">
+      <div class="heading">ABOUT US </div>
+      <div class="documentation">
+        We have recently witnessed the tremendous rate of globalisation and its consequences for humanity. New technologies, such as the Internet and other networks, have both advantages and disadvantages. Speed, efficiency, better time management, access to an ocean of information, mobility, agility, automation, connectivity, remote sharing, better resource management, and the list goes on are just a few of the benefits of emerging technology.<br> In a country like India, for example , Document Verification is a very hectic process people need to stand in queue for the verification and the process is very slow. As also some people submit fake documents so the employees have to be very careful while checking Documents so it becomes very time consuming, sometimes the process takes months and months .So to overcome this issue we are making our project.
 
-
-
-<!-----MY APP ENDS Here-->
-  <nav style="background-color: #5e72e4" class="lighten-1"  role="navigation" style="height: 100px">
-    <div class="nav-wrapper container">
-      <a id="logo-container" class="brand-logo center"><h5>Pan Card Tampering</h5></a>
-      <div style="margin-left: 800px">
-     	     Made by <a class="orange-text text-lighten-3">Pianalytix</a>
       </div>
     </div>
-  </nav>
-
-
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <div class="row">
-        <form action='/' method="post" class="col s12" enctype="multipart/form-data">
-          <div class="row">
-          	<div class="input-field col s3">
-            </div>
-
-            <div class="input-field col s5" style="margin-left: 20px; margin-top: 100px">
-              <div class = "row">
-                <label for="first_name"><b>Upload Pan Card Image</b></label><br>
-                <div class = "file-field input-field">
-                  <div class = "btn" style="background-color: #5e72e4">
-                    <span>Browse</span>
-                    <input type = "file" name="file_upload" id="file_upload" />
-                  </div>
-                  <div class = "file-path-wrapper">
-                    <input class = "file-path validate" type = "text" placeholder = "Upload file" name="file_name" id="file_name" />
-                  </div>
-                </div>
-            </div>
-
-
-
-            <!--------Testing 2---->
-            <div class = "row">
-              <label for="first_name"><b>Upload Aadhar Card Image</b></label><br>
-              <div class = "file-field input-field">
-                <div class = "btn" style="background-color: #5e72e4">
-                  <span>Browse</span>
-                  <input type = "file" name="file_upload2" id="file_upload2" />
-                </div>
-                <div class = "file-path-wrapper">
-                  <input class = "file-path validate" type = "text" placeholder = "Upload file" name="file_name2" id="file_name2" />
-                </div>
-              </div>
-          </div>
-
-            </div>
-          </div>
-    
-          <div class="row center">
-            <button type="submit" class="btn-large" style="background-color: #5e72e4">Check</button>
-          </div>
-        </form>
-       	<div style="text-align: center; padding-top: 50px">
-      		<h5>{{pred}}</h5>
-     	</div>
-
-      </div>
-      <br><br>
+  
+  
+    <div class="about-block2">
+      <img src="{{url_for('static', filename='images/doc.png')}}">
     </div>
   </div>
 
-  </div>
+
+</section>
+
+
+<!-----CONTACT Section-->
+
+<div class="team" id="contact">
+  <div class="team-heading">
+    OUR TEAM
   </div>
 
-  <!--  Scripts-->
-  <script src="./static/js/materialize.js"></script>
-  <script type="text/javascript">
-    document.getElementById('file_upload').onchange = function () {
-      	document.getElementById('file_name').value = this.value.slice(12,100);
-    };
-  </script>
+  <div class="team-container">
+
+
+    <div class="member">
+      <div class="banner">
+        <div class="mem-img">
+          <img src="{{url_for('static', filename='images/vaibhav.JPG')}}">
+        </div>
+
+        <div class="mem-name">
+          Vaibhav Prakash
+        </div>
+
+        <div class="mem-position">
+          Developer
+        </div>
+
+        <div class="mem-email">
+          <a href="mailto:vbhvprksh@gmail.com">vbhvprksh@gmail.com</a>
+        </div>
+
+        <div class="mem-contact">
+          <a href="tel:6201143373">6201143373</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="member">
+      <div class="banner">
+        <div class="mem-img">
+          <img src="{{url_for('static', filename='images/vivek.JPG')}}">
+        </div>
+
+        <div class="mem-name">
+          Vivek Sinha
+        </div>
+
+        <div class="mem-position">
+          Designer
+        </div>
+
+        
+        <div class="mem-email">
+          <a href="mailto:jollylove95@gmail.com ">jollylove95@gmail.com </a>
+        </div>
+
+        <div class="mem-contact">
+          <a href="tel:9006392336">9006392336</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="member">
+      <div class="banner">
+        <div class="mem-img">
+          <img src="{{url_for('static', filename='images/vaishnav.JPEG')}}">
+        </div>
+
+        <div class="mem-name">
+          Vaishnav Suguru
+        </div>
+
+        <div class="mem-position">
+          Developer
+        </div>
+
+        <div class="mem-email">
+          <a href="mailto:vaishnav3912@gmail.com">vaishnav3912@gmail.com</a>
+        </div>
+
+        <div class="mem-contact">
+          <a href="tel:7057106088">7057106088</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---FOOTER STARTS Here--->
+
+<!---FOOTER ENDS Here--->
 
   </body>
 </html>

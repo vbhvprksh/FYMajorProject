@@ -1,0 +1,127 @@
+body{
+    background-color: #fff;
+    overflow-x: hidden;
+}
+section{
+    width: 99%;
+    height: auto;
+    display: flex;
+    border: blue solid 0.5rem;
+    border-radius: 1rem;
+
+}
+.container1{
+    width: 99%;
+    height: 95vh;
+    border-radius: 16px;
+    .blocks{
+        padding-top: 3rem;
+    }
+}
+button{
+    width: 7.5rem;
+    height: 2rem;
+    font-size: 1.35rem;
+    background-color: white;
+    margin-top: 0.35rem;
+    border-radius: 16px;
+}
+.check{
+    margin-left:4.2rem;
+}
+
+/*Container 1 STARTS here.*/
+
+nav{
+    display: flex;
+    margin:0.3rem ;
+    position: relative;
+    background-color: blue;
+    border-radius: 16px;
+    height: 4.5rem;
+    color: white;
+    .logo{
+        width: 16rem;
+        height: 5rem;
+        display: flex;
+        margin-top: 0.6rem;
+        padding-left: 1rem;
+        img{
+            height: 2.8rem;
+            width: 2rem;
+            padding-left: 1rem;
+        }
+        .text{
+            margin-top: 0.6rem;
+            margin-left: 1rem;
+        }
+    }
+    ul{
+        display: flex;
+        margin-left: 32.5rem;
+        padding-right: 1rem;
+        li{
+            margin: 10px;
+            list-style: none;
+            a{
+                text-decoration: none;
+                color:white;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+
+/*Blocks*/
+.blocks{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    .block1{
+        width: 50rem;
+        height: 70vh;
+        border: solid 2px black;
+        margin-left: 12rem;        
+        border-radius: 25px;
+        .details{
+            font-size: 2.2rem;
+            margin: 1.5rem;
+            margin-top: 2rem;
+            background-color: blue;
+            border-radius: 1rem;
+            width: 30rem;
+            padding-left: 1rem;
+            border: solid 2px black;
+            color: #fff;
+        }
+        .carduploads{
+            margin-left: 7.5rem;
+            margin-top: 3.5rem;
+            font-size: 1.5rem;
+            .uploads{
+                .file-field{
+                    margin-left: 2.5rem;
+                }
+            }
+        }
+    }
+
+    }
+    .block2{
+        width: 50%;
+        margin-left: 15%;
+        img{
+            height: 27rem;
+        }
+    }
+
+
+
+
+/*Container 2 STARTS here.*/
+
+
+
+
+

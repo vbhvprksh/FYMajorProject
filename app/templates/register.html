@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login page</title>
+        <title>Register page</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
-        
+        <!----Login and Signup here-->
+
     <section class="login_blocks">
         <a href="/"><div class="cross">+</div></a>
         <div class="block1">
@@ -17,24 +18,19 @@
                 <div class="htext">
                     Welcome Back
                 </div>
-    
-                <form class="inputs" method="post">
-                    <label>Email</label>
-                    <input type="text" placeholder="Enter your Username" name="username">
-                    <label>Password</label>
-                    <input type="password" placeholder="Enter Your Password" name="password">
-                    <button type="submit" value="Login" class="lsubmit">Login</button>
+                <form method="post" action="#" class="inputs">
+                    <label>Enter Username</label>
+                    <input type="text" placeholder="Enter Username" name="DUsername">
+                    <label>Enter Password</label>
+                    <input type="password" placeholder="Enter Password" name="pwd">
+                    <label>Enter Email</label>
+                    <input type="text" placeholder="Enter Email" name="EmailUser">
+                    <button type="submit" value="Register" class="lsubmit">Register</button>
                 </form>
-    
                 <div class="extras">
-                    <h5>Not a Member - </h5><br>
-                    <a href="/register">
-                        <h4>  Signup</h4></a>
+                    <a href="/login"><h5>Alredy a Member??</h5></a>
                     <h5>Forgot Password ??</h5>
                 </div>
-    
-                
-    
             </div>
         </div>
     

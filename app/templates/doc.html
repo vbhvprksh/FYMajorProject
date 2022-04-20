@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Upload Documents</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{url_for('static', filename='css/doc.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    </head>
+    <body>
+        <section >
+            <div class="container1">
+            <!----Navbar-->
+                <nav>
+                    <div class="logo">
+                        <div class="img">
+                            <img src="{{url_for('static', filename='images/logo.png')}}">
+                        </div>
+                        <div class="text">
+                                User Document
+                            <br>
+                            Verification Portal
+                        </div>
+                    </div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blogs</a></li>
+                        <a href="/login"><button style="color:blue;">Logout</button></a>
+                    </ul>
+                </nav>
+                <!----Home-->
+                <div class="blocks">
+                    <div class="block1">
+
+
+<!---PAN CARD BEGINS Here-->
+                        <div class="details">
+                            Upload your Documents Here
+                        </div>
+
+                        <div class="carduploads">
+                            <form action='/pan' method="post">
+                                <div class = "uploads">
+                                    <label ><b>Upload Pan Card Image</b></label><br>
+                                    <div class = "file-field">
+                                        <div >
+                                            <input type = "file" name="file_uploading" id="file_upload" />
+                                        </div>
+                                    </div>
+                                </div>
+                            <div>
+                            <button type="submit" class="check">Check</button>
+                            </div>
+                        </form>
+                            <div class="accuracy" style="text-align: center; padding-top: 50px">
+                                <h5>{{pred}}</h5>
+                            </div>
+
+<!----PAN CARD ENDS Here-->
+
+
+<!-----AADHAR CARD STARTS Here-->
+
+                        <form action='/aadhar' method="post" class="col s12" enctype="multipart/form-data">
+                                <div class = "uploads">
+                                    <label for="first_name"><b>Upload Aadhar Card Image</b></label><br>
+                                    <div class = "file-field input-field">
+                                    <div>
+                                        <input type = "file" name="file_uploadd" id="file_uploadd" />
+                                    </div>
+                                    </div>
+                                </div>
+                            <div class="row center">
+                            <button type="submit" class="check">Check</button>
+                            </div>
+                        </form>
+                            <div style="text-align: center; padding-top: 50px">
+                                <h5>{{predd}}</h5>
+                            </div>
+
+                        </div>
+<!--AADHAR CARD ENDS HERE-->
+                    </div>
+
+
+
+                    <div class="block2">
+                        <img class="loggedimg" src="{{url_for('static', filename='images/loggedin.png')}}">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+
+        
+  <!--  Scripts-->
+  <script src="./static/js/materialize.js"></script>
+  <script type="text/javascript">
+    document.getElementById('file_upload').onchange = function () {
+      	document.getElementById('file_name').value = this.value.slice(12,100);
+    };
+  </script>
+
+    </body>
+</html>
