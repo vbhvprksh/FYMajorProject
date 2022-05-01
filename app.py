@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from app import app
-from flask import render_template,request,redirect
+from flask import render_template,request,redirect,request
 import sqlite3
 import os
+import json
+from flask_mail import Mail,Message
+from random import *
+from twilio.rest import Client
 
 
 #Routes
-
-#Home
 
 # Route to home page
 @app.route("/")
@@ -119,7 +121,7 @@ def doc():
 
 
 
-#Thank you Route Starts here
+#Thank you & Blog Route Starts here
 
 @app.route("/thank")
 def thankyou():
@@ -129,6 +131,7 @@ def thankyou():
 def blogs():
     return render_template("blogs.html")
 
+#Thank you & Blog Route Ends here
 
 
 
@@ -136,13 +139,49 @@ def blogs():
 #EmailOtp Validation Starts here
 
 
+with open('config.json','r') as f:
+    params=json.load(f)['param']
+
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT']=465
+app.config['MAIL_USERNAME']=params['gmail-user']
+app.config['MAIL_PASSWORD']=params['gmail-password']
+app.config['MAIL_USE_TLS']=False
+app.config['MAIL_USE_SSL']=True
+mail=Mail(app)
+
+
+
+otp=randint(000000,999999)
+
+
+
+@app.route("/verify",methods=['POST','GET'])
+def verify():
+    if request.method=="POST":
+        email=request.form["email"]
+    msg = Message("OTP Verification",sender="vbhvprksh@gmail.com",recipients=[email])
+    msg.body=str(otp)
+    mail.send(msg)
+    return render_template("index.html")
+
+
+@app.route("/validate",methods=['POST','GET'])
+def validate():
+    userotp=request.form["eotp"]
+    if otp== int(userotp):
+        return render_template("thankyou.html")
+
+    return ("not verified , Please try again later")
+
+
 #EmailOtp Validation Ends here
 
 
-#Pan Verification
 
 
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=2000)

@@ -1,4 +1,4 @@
-# Important imports
+#Imports
 from app import app
 from flask import request, render_template
 import os
@@ -12,6 +12,14 @@ app.config['INITIAL_FILE_UPLOADS'] = 'app/static/uploads'
 app.config['EXISTNG_FILE'] = 'app/static/original'
 app.config['GENERATED_FILE'] = 'app/static/generated'
 
+
+
+#Test Starts Here
+#Test Ends Here
+
+
+
+
 #PAN card
 
 @app.route("/pan", methods=["GET", "POST"])
@@ -24,7 +32,7 @@ def pan():
 	# Execute if reuqest is post
 	if request.method == "POST":
                 # Get uploaded image
-                file_upload = request.files['file_uploading']
+                file_upload = request.files['file_upload']
                 filename = file_upload.filename
                 
                 # Resize and save the uploaded image

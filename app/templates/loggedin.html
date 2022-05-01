@@ -9,7 +9,7 @@
         <link href="{{url_for('static', filename='css/loggedin.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
-        <section >
+        <section id="step1" >
             <div class="container1">
             <!----Navbar-->
                 <nav>
@@ -52,10 +52,6 @@
 
                                 <div class="fill">
                                     <label>Email</label><br>
-                                    <div class="flex">
-                                        <input type="email" id="email" name="lemail"><br>
-                                        <button style="width: 5rem; font-size: 1rem; background-color: blue;color: white;" class="otp">Get OTP</button>
-                                    </div>
                                     <div class="flex2">
                                         <input type="number"  name="lemail" class="otp"><br>
                                         <button style="width: 5rem; font-size: 1rem; background-color: blue;color: white;" class="otp">Verify</button>
@@ -86,6 +82,34 @@
                 </div>
             </div>
         </section>
+
+        <section id="step2" >
+            <div class="container1">
+                <!----Home-->
+                <div class="blocks">
+                    <div class="block1">
+                        <div class="flex">
+                            <form method="post" action="/verify">
+                                <input type="email" id="login" name="email" placeholder="Enter your email id"><br>
+                                <button style="width: 5rem; font-size: 1rem; background-color: blue;color: white;" class="otp"  type="submit" value="Send Otp">Get Otp</button>
+                            </form>
+                            <form method="post" action="/validate">
+                                <input type="number"  name="eotp" placeholder="Enter OTP">
+                                <input type="submit" value="Submit">
+                            </form>
+                    
+                        </div>
+                        
+                    </div>
+                    <!----Trial-->
+                    <!---Trial Ends-->
+                    <div class="block2">
+                        <img class="loggedimg" src="{{url_for('static', filename='images/loggedin.png')}}">
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         
     </body>
