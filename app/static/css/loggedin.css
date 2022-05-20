@@ -17,12 +17,12 @@ section {
 
 .container1 {
   width: 99%;
-  height: 95vh;
+  height: 99vh;
   border-radius: 16px;
 }
 
 .container1 .blocks {
-  padding-top: 3rem;
+  padding-top: 0rem;
 }
 
 button {
@@ -64,6 +64,7 @@ nav .logo img {
 }
 
 nav .logo .text {
+  width: 8rem;
   margin-top: 0.6rem;
   margin-left: 1rem;
 }
@@ -72,7 +73,7 @@ nav ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-left: 32.5rem;
+  margin-left: 30.5rem;
   padding-right: 1rem;
 }
 
@@ -87,6 +88,45 @@ nav ul li a {
   font-size: 1.3rem;
 }
 
+/*Steps*/
+.steps {
+  width: 90%;
+  margin-left: 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.steps .step_box {
+  background-color: #f3f3f3;
+  border: solid black 2px;
+  width: 10rem;
+  height: 3.5rem;
+  margin: 10px;
+  padding-left: 3.5rem;
+  border-radius: 1rem;
+}
+
+.steps .step_box h1 {
+  font-size: 1.75rem;
+  margin: 0.7rem;
+  margin-left: 0.1rem;
+}
+
+.steps .step_box span {
+  color: blue;
+}
+
+.steps hr {
+  height: 1.25rem;
+  margin-top: 2.5rem;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  color: black;
+  border: solid 2px black;
+}
+
+/*Steps*/
 /*Blocks*/
 .blocks {
   width: 100%;
@@ -98,30 +138,33 @@ nav ul li a {
 
 .blocks .block1 {
   width: 50%;
-  margin-top: 7rem;
+  margin-top: 1rem;
+}
+
+.blocks .block1 .flex {
+  margin: 5rem;
 }
 
 .blocks .block1 .texts {
   margin-left: 12rem;
-  margin-top: -5rem;
+  margin-top: -1rem;
   position: relative;
   width: 32rem;
   border: 2px solid black;
   border-radius: 16px;
-  padding-bottom: 1rem;
+  padding-bottom: 0rem;
 }
 
 .blocks .block1 .texts .details {
   font-size: 2.2rem;
   margin-left: 2.5rem;
-  margin-top: 2rem;
+  margin-top: 0.75rem;
 }
 
 .blocks .block1 .texts .fill1 {
   font-size: 1.4rem;
-  margin-top: 1.75rem;
+  margin-top: 1rem;
   margin-left: 3.5rem;
-  margin-top: 2rem;
 }
 
 .blocks .block1 .texts .fill {
@@ -179,7 +222,8 @@ nav ul li a {
   font-size: 1.5rem;
   height: 2.5rem;
   margin-left: 5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   cursor: pointer;
 }
 
@@ -191,12 +235,60 @@ nav ul li a {
 
 .blocks .block2 {
   width: 50%;
-  margin-left: 35%;
+  margin-left: 20%;
+  margin-top: 1rem;
 }
 
 .blocks .block2 img {
-  height: 27rem;
+  height: 20rem;
 }
 
-/*Container 2 STARTS here.*/
+/*Section 2 STARTS here.*/
+.upload {
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-left: 3rem;
+}
+
+.upload-btn {
+  margin-left: 7.5rem;
+  margin-top: 1rem;
+}
+
+.uploads {
+  font-size: 2rem;
+  margin-top: -3.5rem;
+  margin-left: 3rem;
+}
+
+.uploads-btn {
+  margin-left: 7.7rem;
+  margin-top: 1rem;
+}
+
+.pan-details {
+  font-size: 2rem;
+  margin-left: 2.5rem;
+  margin-top: 0.75rem;
+}
+
+/*Section4*/
+.verify {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#login {
+  height: 2rem;
+  width: 15rem;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+}
+
+#check {
+  height: 2rem;
+  width: 15rem;
+  border-radius: 1rem;
+}
 /*# sourceMappingURL=loggedin.css.map */

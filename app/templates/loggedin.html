@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +9,9 @@
         <link href="{{url_for('static', filename='css/loggedin.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
+
+<!------Section 1 Starts here---->
+
         <section id="step1" >
             <div class="container1">
             <!----Navbar-->
@@ -32,14 +35,44 @@
                     </ul>
                 </nav>
                 <!----Home-->
+
+
+<!---Stepping Page Starts here---->
+
+            <div class="steps">
+                <div class="step_box">
+                    <span><h1>Step 1</h1></span>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 2</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 3</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 4</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 5</h1>
+                </div>
+            </div>
+
+<!---Stepping Page Ends here---->
+
+
+
+
                 <div class="blocks">
                     <div class="block1">
                         <form method="post" action="/loggedin">
                             <div class="texts">
                                 <div class="details">
-                                    Please Fill in your details
+                                    <u>Please Fill in your details</u>
                                 </div>
-    
                                 <div class="fill1">
                                     <label>First Name</label><br>
                                     <input type="text" id="fname" name="fname"><br>
@@ -49,15 +82,6 @@
                                     <label>Last Name</label><br>
                                     <input type="text" id="lname" name="lname"><br>
                                 </div>
-
-                                <div class="fill">
-                                    <label>Email</label><br>
-                                    <div class="flex2">
-                                        <input type="number"  name="lemail" class="otp"><br>
-                                        <button style="width: 5rem; font-size: 1rem; background-color: blue;color: white;" class="otp">Verify</button>
-                                    </div>
-                                </div>
-    
                                 <div class="fill">
                                     <label>Contact No</label><br>
                                     <input type="mobile" id="mobile" name="mobile"><br>
@@ -82,24 +106,187 @@
                 </div>
             </div>
         </section>
+<!------Section 1 Ends here---->
 
-        <section id="step2" >
+
+<!---Section 2 Starts Here-->
+
+<section id="step2" >
+    <div class="container1">
+    <!----Navbar-->
+        <nav>
+            <div class="logo">
+                <div class="img">
+                    <img src="{{url_for('static', filename='images/logo.png')}}">
+                </div>
+                <div class="text">
+                        User Document
+                    <br>
+                    Verification Portal
+                </div>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Conatct</a></li>
+                <li><a href="#">Blogs</a></li>
+                <a href="/login"><button style="color:blue;">Logout</button></a>
+            </ul>
+        </nav>
+        <!----Home-->
+
+
+<!---Stepping Page Starts here---->
+
+    <div class="steps">
+        <div class="step_box">
+            <h1>Step 1</h1>
+        </div>
+        <hr>
+        <div class="step_box">
+            <span><h1>Step 2</h1></span>
+        </div>
+        <hr>
+        <div class="step_box">
+            <h1>Step 3</h1>
+        </div>
+        <hr>
+        <div class="step_box">
+            <h1>Step 4</h1>
+        </div>
+        <hr>
+        <div class="step_box">
+            <h1>Step 5</h1>
+        </div>
+    </div>
+
+<!---Stepping Page Ends here---->
+
+
+
+
+        <div class="blocks">
+            <div class="block1" style="border: 2px solid #000;border-radius: 1rem; width: 52rem; height: 22rem;margin-left: 12rem; " >
+                <div class="flex">
+                    <form method="post" action="/verify" class="verify">
+                        <input type="email" id="login" name="accessemail" placeholder="Enter your email id"><br>
+                        <button style="width: 5rem; font-size: 1rem;margin-left: 1rem; background-color: blue;color: white;" class="otp"  type="submit" value="Send Otp">Get Otp</button>
+                    </form>
+                    <form method="post" action="/validate" class="verify">
+                        <input type="number"  name="eotp" id="check" placeholder="Enter OTP">
+                        <input type="submit" value="Submit" style="margin-left: 1rem; width: 7rem; font-size: 1rem; background-color: blue;color: white; border-radius: 1rem;">
+                    </form>
+            
+                </div>
+            </div>
+            <!----Trial-->
+            <!---Trial Ends-->
+            <div class="block2">
+                <img class="loggedimg" src="{{url_for('static', filename='images/loggedin.png')}}">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!---Section 2 Ends Here---->
+
+
+
+
+<!------Section 3 Starts here---->
+
+
+        <section id="step3" >
             <div class="container1">
-                <!----Home-->
-                <div class="blocks">
-                    <div class="block1">
-                        <div class="flex">
-                            <form method="post" action="/verify">
-                                <input type="email" id="login" name="email" placeholder="Enter your email id"><br>
-                                <button style="width: 5rem; font-size: 1rem; background-color: blue;color: white;" class="otp"  type="submit" value="Send Otp">Get Otp</button>
-                            </form>
-                            <form method="post" action="/validate">
-                                <input type="number"  name="eotp" placeholder="Enter OTP">
-                                <input type="submit" value="Submit">
-                            </form>
-                    
+            <!----Navbar-->
+                <nav>
+                    <div class="logo">
+                        <div class="img">
+                            <img src="{{url_for('static', filename='images/logo.png')}}">
                         </div>
-                        
+                        <div class="text">
+                                User Document
+                            <br>
+                            Verification Portal
+                        </div>
+                    </div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Conatct</a></li>
+                        <a href="/login"><button style="color:blue;">Logout</button></a>
+                    </ul>
+                </nav>
+                <!----Home-->
+
+
+<!---Stepping Page Starts here---->
+
+            <div class="steps">
+                <div class="step_box">
+                    <h1>Step 1</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 2</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <span><h1>Step 3</h1></span>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 4</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 5</h1>
+                </div>
+            </div>
+
+<!---Stepping Page Ends here---->
+
+
+
+
+                <div class="blocks">
+                    <div class="block1" style="border: 2px solid #000;border-radius: 1rem; width: 55rem; height: 22rem;margin-left: 12rem; " >
+                        <div class="pan-details">
+                            <u>Please Upload your PanCard</u>
+                        </div>
+                        <form action='/pan' method="post" enctype="multipart/form-data">
+                            <div class = "upload">
+                                <label ><b>Upload Pan Card Image</b></label><br>
+                                    <div class = "file-field">
+                                        <div>
+                                            <input type = "file" name="panfile" id="panfile"/>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="upload-btn">
+                                <button type="submit" class="check">Upload</button>
+                            </div>
+                        </form>
+                            <div class="accuracy" style="text-align: center; padding-top: 50px">
+                                <h5>{{pred}}</h5>
+                            </div>
+<!-----FORM2 Stars here----->
+                        <form action='/aadhar' method="post" class="col s12" enctype="multipart/form-data">
+                            <div class = "uploads">
+                                <label for="first_name"><b>Upload Aadhar Card Image</b></label><br>
+                                <div class = "file-field input-field">
+                                            <input type = "file" name="file_uploadd" id="file_uploadd" />
+                                </div>
+                            </div>
+                                <div class="uploads-btn">
+                                <button type="submit" class="check">Next</button>
+                                </div>
+                        </form>
+                                <div style="text-align: center; padding-top: 50px">
+                                    <h5>{{predd}}</h5>
+                                </div>
+
+
                     </div>
                     <!----Trial-->
                     <!---Trial Ends-->
@@ -109,6 +296,208 @@
                 </div>
             </div>
         </section>
+
+
+<!------Section 3 Ends here---->
+
+
+<!-----Section 4 Starts Here--->
+
+        <section id="step4" >
+            <div class="container1">
+            <!----Navbar-->
+                <nav>
+                    <div class="logo">
+                        <div class="img">
+                            <img src="{{url_for('static', filename='images/logo.png')}}">
+                        </div>
+                        <div class="text">
+                                User Document
+                            <br>
+                            Verification Portal
+                        </div>
+                    </div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Conatct</a></li>
+                        <li><a href="#">Blogs</a></li>
+                        <a href="/login"><button style="color:blue;">Logout</button></a>
+                    </ul>
+                </nav>
+                <!----Home-->
+
+
+<!---Stepping Page Starts here---->
+
+            <div class="steps">
+                <div class="step_box">
+                    <h1>Step 1</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 2</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 3</h1>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <span><h1>Step 4</h1></span>
+                </div>
+                <hr>
+                <div class="step_box">
+                    <h1>Step 5</h1>
+                </div>
+            </div>
+
+<!---Stepping Page Ends here---->
+
+
+
+
+                <div class="blocks">
+                    <div class="block1" style="border: 2px solid #000;border-radius: 1rem; width: 55rem; height: 22rem;margin-left: 12rem; " >
+                        <div class="pan-details">
+                            <u>Please Upload your Aadhar</u>
+                        </div>
+                        <form action='/pan' method="post" enctype="multipart/form-data">
+                            <div class = "upload">
+                                <label ><b>Upload Pan Card Image</b></label><br>
+                                    <div class = "file-field">
+                                        <div>
+                                            <input type = "file" name="panfile" id="panfile"/>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="upload-btn">
+                                <button type="submit" class="check">Upload</button>
+                            </div>
+                        </form>
+                            <div class="accuracy" style="text-align: center; padding-top: 50px">
+                                <h5>{{pred}}</h5>
+                            </div>
+<!-----FORM2 Stars here----->
+                        <form action='/aadhar' method="post" class="col s12" enctype="multipart/form-data">
+                            <div class = "uploads">
+                                <label for="first_name"><b>Upload Aadhar Card Image</b></label><br>
+                                <div class = "file-field input-field">
+                                            <input type = "file" name="file_uploadd" id="file_uploadd" />
+                                </div>
+                            </div>
+                                <div class="uploads-btn">
+                                <button type="submit" class="check">Next</button>
+                                </div>
+                        </form>
+                                <div style="text-align: center; padding-top: 50px">
+                                    <h5>{{predd}}</h5>
+                                </div>
+
+
+                    </div>
+                    <!----Trial-->
+                    <!---Trial Ends-->
+                    <div class="block2">
+                        <img class="loggedimg" src="{{url_for('static', filename='images/loggedin.png')}}">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-----Section 4 Ends Here--->
+
+
+
+
+<!-----Section 2 Starts Here--->
+
+<section id="step2" >
+    <div class="container1">
+    <!----Navbar-->
+        <nav>
+            <div class="logo">
+                <div class="img">
+                    <img src="{{url_for('static', filename='images/logo.png')}}">
+                </div>
+                <div class="text">
+                        User Document
+                    <br>
+                    Verification Portal
+                </div>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Conatct</a></li>
+                <li><a href="#">Blogs</a></li>
+                <a href="/login"><button style="color:blue;">Logout</button></a>
+            </ul>
+        </nav>
+        <!----Home-->
+
+
+<!---Stepping Page Starts here---->
+
+    <div class="steps">
+        <div class="step_box">
+            <h1>Step 1</h1>
+        </div>
+        <hr>
+        <div class="step_box">
+            <span><h1>Step 2</h1></span>
+        </div>
+        <hr>
+        <div class="step_box">
+            <h1>Step 3</h1>
+        </div>
+        <hr>
+        <div class="step_box">
+            <h1>Step 4</h1>
+        </div>
+        <hr>
+        <div class="step_box">
+            <h1>Step 5</h1>
+        </div>
+    </div>
+
+<!---Stepping Page Ends here---->
+
+
+
+
+        <div class="blocks">
+            <div class="block1" style="border: 2px solid #000;border-radius: 1rem; width: 52rem; height: 22rem;margin-left: 12rem; " >
+                <div class="flex">
+                    <form method="post" action="/verify" class="verify">
+                        <input type="email" id="login" name="accessemail" placeholder="Enter your email id"><br>
+                        <button style="width: 5rem; font-size: 1rem;margin-left: 1rem; background-color: blue;color: white;" class="otp"  type="submit" value="Send Otp">Get Otp</button>
+                    </form>
+                    <form method="post" action="/validate" class="verify">
+                        <input type="number"  name="eotp" id="check" placeholder="Enter OTP">
+                        <input type="submit" value="Submit" style="margin-left: 1rem; width: 7rem; font-size: 1rem; background-color: blue;color: white; border-radius: 1rem;">
+                    </form>
+            
+                </div>
+            </div>
+            <!----Trial-->
+            <!---Trial Ends-->
+            <div class="block2">
+                <img class="loggedimg" src="{{url_for('static', filename='images/loggedin.png')}}">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Section 2 ENDS Here---->
+
+         <!--  Scripts-->
+  <script src="./static/js/materialize.js"></script>
+  <script type="text/javascript">
+    document.getElementById('file_upload').onchange = function () {
+      	document.getElementById('file_name').value = this.value.slice(12,100);
+    };
+  </script>
 
 
         
