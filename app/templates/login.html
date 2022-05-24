@@ -6,7 +6,7 @@
         <title>Login page</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="{{url_for('static', filename='css/login.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
         
@@ -20,9 +20,9 @@
     
                 <form class="inputs" method="post">
                     <label>Username</label>
-                    <input type="text" placeholder="Enter your Username" name="username">
+                    <input type="text" placeholder="Enter your Username" name="username" required>
                     <label>Password</label>
-                    <input type="password" placeholder="Enter Your Password" name="password">
+                    <input type="password" placeholder="Enter Your Password" name="password" required>
                     <button type="submit" value="Login" class="lsubmit">Login</button>
                 </form>
     

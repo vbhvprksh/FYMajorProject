@@ -2,6 +2,7 @@
 
 
 from cgitb import html
+from pydoc import doc
 from django.shortcuts import render
 from app import app
 from flask import render_template,request,redirect,request
@@ -28,6 +29,16 @@ import imutils
 def index():
     return render_template('index.html')
 
+#Route to Login Page
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+#Last Page
+@app.route("/thankyou")
+def thank():
+    return render_template("thankyou.html")
 
 
 #Register Routes Begin
@@ -65,10 +76,6 @@ def registerpage():
 
 #Login Routes BEGIN
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
 
 @app.route("/login",methods=["POST"])
 def checklogin():
@@ -92,7 +99,6 @@ def checklogin():
 
 #Loggedin Routes Starts here
 @app.route("/loggedin",methods=["GET","POST"])
-
 def logged():
     if request.method == "POST":
         print("In the post method")
@@ -156,7 +162,9 @@ def verify():
 
         #Flask_Mail
         msg = Message("OTP Verification",sender="vbhvprksh@gmail.com",recipients=[accessemail])
-        msg.body=str(otp)
+        msg.body=("Welcome to Automated Document Verification Portal.Your Otp for Verification is" +" " + str(otp) + " " +"It is valid for next 5 mins.")
+        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/otp.png") as fp:
+            msg.attach("doc_verificaion.png","image/png",fp.read())
         mail.send(msg)
     return redirect("/loggedin#step2")
 
@@ -255,7 +263,6 @@ def pan():
                     (x, y, w, h) = cv2.boundingRect(c)
                     cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
                     cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-
                 # Save all output images (if required)
                 cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
                 cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
@@ -270,20 +277,20 @@ def pan():
 
                 if (pred>"75%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Verified"+ pred)
+                    pan_msg.body=str("Congratulation Your Document has been Verified sucessfully. Thank you for using our Document verification Portal hope you liked it though. And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ pred + "Thank you for Visiting our Portal once again.")
+                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                        pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                     mail.send(pan_msg)
                 else:
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Not Verified"+ pred)
+                    pan_msg.body=str("Your Document has not been Verified. Thank you for using our Document verification Portal hope you liked it though.Please Do not use this tampered document anywhere And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ pred + "Thank you for Visiting our Portal once again.")
+                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                        pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                     mail.send(pan_msg)
-
-
-                #Fetch Email
-                #Email Result
-                
                 return redirect("/loggedin#step4")
 
 
+#Aadhar Card SSIM
 
 @app.route("/aadhar", methods=["GET", "POST"])
 def aadhar():
@@ -342,11 +349,16 @@ def aadhar():
                     
                     if (predd>"75%"):
                         aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        aadhar_msg.body=str("Verified"+ predd)
+                        aadhar_msg.body=str("Congratulation Your Document has been Verified sucessfully. Thank you for using our Document verification Portal hope you liked it though. And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ predd + "Thank you for Visiting our Portal once again.")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
                         mail.send(aadhar_msg)
                     else:
                         aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        aadhar_msg.body=str("Not Verified"+ predd)
+                        aadhar_msg.body=str("Your Document has not been Verified. Thank you for using our Document verification Portal hope you liked it though.Please Do not use this tampered document anywhere And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ predd + "Thank you for Visiting our Portal once again.")
+                            
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
                         mail.send(aadhar_msg)
                     return render_template("/thankyou.html")
 
@@ -355,11 +367,6 @@ def aadhar():
 
 
 
-
-@app.route("/thankyou")
-def thank():
-    return render_template("thankyou.html")
-                
 
 
 

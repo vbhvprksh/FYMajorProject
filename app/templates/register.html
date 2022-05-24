@@ -6,7 +6,7 @@
         <title>Register page</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="{{url_for('static', filename='css/login.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
         <!----Login and Signup here-->
@@ -20,11 +20,11 @@
                 </div>
                 <form method="post" action="#" class="inputs">
                     <label>Enter Username</label>
-                    <input type="text" placeholder="Enter Username" name="DUsername">
+                    <input type="text" placeholder="Enter Username" name="DUsername" required>
                     <label>Enter Password</label>
-                    <input type="password" placeholder="Enter Password" name="pwd">
+                    <input type="password" placeholder="Enter Password" name="pwd" required>
                     <label>Enter Email</label>
-                    <input type="text" placeholder="Enter Email" name="EmailUser">
+                    <input type="text" placeholder="Enter Email" name="EmailUser" required>
                     <button type="submit" value="Register" class="lsubmit">Register</button>
                 </form>
                 <div class="extras">

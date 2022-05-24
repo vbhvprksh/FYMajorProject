@@ -79,13 +79,15 @@ nav{
     width: 90%;
     margin-left: 5%;
     display: flex;
+    height: 5rem;
+    align-items: center;
     .step_box{
         background-color: #f3f3f3;
         border: solid black 2px;
-        width: 10rem;
+        width: 7rem;
         height: 3.5rem;
-        margin: 10px;
-        padding-left: 3.5rem;
+        margin: 5px;
+        padding-left: 1.5rem;
         border-radius: 1rem;
         h1{
             font-size: 1.75rem;
@@ -97,8 +99,8 @@ nav{
         }
     }
     hr{
-        height: 1.25rem; 
-        margin-top:2.5rem;
+        height: 10.25rem; 
+        
         transform: rotate(90deg);
         color: black;
         border: solid 2px black;

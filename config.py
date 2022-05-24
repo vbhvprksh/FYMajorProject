@@ -31,7 +31,7 @@ class TestingConfig(Config):
     UPLOADS = "/home/username/app/app/static/uploads"
     SESSION_COOKIE_SECURE = False
 
- 
+
 class DebugConfig(Config):
     DEBUG = False
 

@@ -30,7 +30,6 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Conatct</a></li>
-                        <li><a href="#">Blogs</a></li>
                         <a href="/login"><button style="color:blue;">Logout</button></a>
                     </ul>
                 </nav>
@@ -55,10 +54,6 @@
                 <div class="step_box">
                     <h1>Step 4</h1>
                 </div>
-                <hr>
-                <div class="step_box">
-                    <h1>Step 5</h1>
-                </div>
             </div>
 
 <!---Stepping Page Ends here---->
@@ -75,21 +70,21 @@
                                 </div>
                                 <div class="fill1">
                                     <label>First Name</label><br>
-                                    <input type="text" id="fname" name="fname"><br>
+                                    <input type="text" id="fname" name="fname" required><br>
                                 </div>
                                 
                                 <div class="fill">
                                     <label>Last Name</label><br>
-                                    <input type="text" id="lname" name="lname"><br>
+                                    <input type="text" id="lname" name="lname" required><br>
                                 </div>
                                 <div class="fill">
                                     <label>Contact No</label><br>
-                                    <input type="mobile" id="mobile" name="mobile"><br>
+                                    <input type="mobile" id="mobile" name="mobile" pattern="\d*" title="Numbers only, please." required><br>
                                 </div>
     
                                 <div class="date">
                                     <label>Date of Birth</label><br>
-                                    <input type="date" id="date" name="date"><br>
+                                    <input type="date" id="date" name="date" required><br>
                                 </div>
                                 <div class="btns">
                                     <a href="/login"><input type="back" value="Back" class="btn"></a>
@@ -129,7 +124,6 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Conatct</a></li>
-                <li><a href="#">Blogs</a></li>
                 <a href="/login"><button style="color:blue;">Logout</button></a>
             </ul>
         </nav>
@@ -154,10 +148,6 @@
         <div class="step_box">
             <h1>Step 4</h1>
         </div>
-        <hr>
-        <div class="step_box">
-            <h1>Step 5</h1>
-        </div>
     </div>
 
 <!---Stepping Page Ends here---->
@@ -169,11 +159,11 @@
             <div class="block1" style="border: 2px solid #000;border-radius: 1rem; width: 52rem; height: 22rem;margin-left: 12rem; " >
                 <div class="flex">
                     <form method="post" action="/verify" class="verify">
-                        <input type="email" id="login" name="accessemail" placeholder="Enter your email id"><br>
-                        <button style="width: 5rem; font-size: 1rem;margin-left: 1rem; background-color: blue;color: white;" class="otp"  type="submit" value="Send Otp">Get Otp</button>
+                        <input type="email" id="login" name="accessemail" placeholder="Enter your email id" required><br>
+                        <button style="width: 7rem;height: 2.5rem; font-size: 1rem;margin-left: 1rem; background-color: blue;color: white;" class="otp"  type="submit" value="Send Otp">Get Otp</button>
                     </form>
                     <form method="post" action="/validate" class="verify">
-                        <input type="number"  name="eotp" id="check" placeholder="Enter OTP">
+                        <input type="number"  name="eotp" id="check" placeholder="Enter OTP" required>
                         <input type="submit" value="Submit" style="margin-left: 1rem; width: 7rem; font-size: 1rem; background-color: blue;color: white; border-radius: 1rem;">
                     </form>
             
@@ -237,10 +227,6 @@
                 <hr>
                 <div class="step_box">
                     <h1>Step 4</h1>
-                </div>
-                <hr>
-                <div class="step_box">
-                    <h1>Step 5</h1>
                 </div>
             </div>
 
@@ -321,7 +307,6 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Conatct</a></li>
-                        <li><a href="#">Blogs</a></li>
                         <a href="/login"><button style="color:blue;">Logout</button></a>
                     </ul>
                 </nav>
@@ -346,10 +331,6 @@
                 <div class="step_box">
                     <span><h1>Step 4</h1></span>
                 </div>
-                <hr>
-                <div class="step_box">
-                    <h1>Step 5</h1>
-                </div>
             </div>
 
 <!---Stepping Page Ends here---->
@@ -367,7 +348,7 @@
                                 <label ><b>Upload Pan Card Image</b></label><br>
                                     <div class = "file-field">
                                         <div>
-                                            <input type = "file" name="panfile" id="panfile"/>
+                                            <input type = "file" name="panfile" id="panfile"/ accept="image/*" title="Only images are allowed">
                                         </div>
                                     </div>
                             </div>
@@ -383,7 +364,7 @@
                             <div class = "uploads">
                                 <label for="first_name"><b>Upload Aadhar Card Image</b></label><br>
                                 <div class = "file-field input-field">
-                                            <input type = "file" name="file_uploadd" id="file_uploadd" />
+                                            <input type = "file" accept="image/*" title="Only images are allowed" name="file_uploadd" id="file_uploadd" />
                                 </div>
                             </div>
                                 <div class="uploads-btn">
@@ -411,84 +392,6 @@
 
 
 <!-----Section 2 Starts Here--->
-
-<section id="step2" >
-    <div class="container1">
-    <!----Navbar-->
-        <nav>
-            <div class="logo">
-                <div class="img">
-                    <img src="{{url_for('static', filename='images/logo.png')}}">
-                </div>
-                <div class="text">
-                        User Document
-                    <br>
-                    Verification Portal
-                </div>
-            </div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Conatct</a></li>
-                <li><a href="#">Blogs</a></li>
-                <a href="/login"><button style="color:blue;">Logout</button></a>
-            </ul>
-        </nav>
-        <!----Home-->
-
-
-<!---Stepping Page Starts here---->
-
-    <div class="steps">
-        <div class="step_box">
-            <h1>Step 1</h1>
-        </div>
-        <hr>
-        <div class="step_box">
-            <span><h1>Step 2</h1></span>
-        </div>
-        <hr>
-        <div class="step_box">
-            <h1>Step 3</h1>
-        </div>
-        <hr>
-        <div class="step_box">
-            <h1>Step 4</h1>
-        </div>
-        <hr>
-        <div class="step_box">
-            <h1>Step 5</h1>
-        </div>
-    </div>
-
-<!---Stepping Page Ends here---->
-
-
-
-
-        <div class="blocks">
-            <div class="block1" style="border: 2px solid #000;border-radius: 1rem; width: 52rem; height: 22rem;margin-left: 12rem; " >
-                <div class="flex">
-                    <form method="post" action="/verify" class="verify">
-                        <input type="email" id="login" name="accessemail" placeholder="Enter your email id"><br>
-                        <button style="width: 5rem; font-size: 1rem;margin-left: 1rem; background-color: blue;color: white;" class="otp"  type="submit" value="Send Otp">Get Otp</button>
-                    </form>
-                    <form method="post" action="/validate" class="verify">
-                        <input type="number"  name="eotp" id="check" placeholder="Enter OTP">
-                        <input type="submit" value="Submit" style="margin-left: 1rem; width: 7rem; font-size: 1rem; background-color: blue;color: white; border-radius: 1rem;">
-                    </form>
-            
-                </div>
-            </div>
-            <!----Trial-->
-            <!---Trial Ends-->
-            <div class="block2">
-                <img class="loggedimg" src="{{url_for('static', filename='images/loggedin.png')}}">
-            </div>
-        </div>
-    </div>
-</section>
-
 <!--Section 2 ENDS Here---->
 
          <!--  Scripts-->

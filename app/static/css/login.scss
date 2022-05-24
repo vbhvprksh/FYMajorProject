@@ -1,0 +1,355 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-color: #fff;
+    overflow-x: hidden;
+    position: relative !important;
+    overflow-x: hidden;
+}
+
+
+section{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.lsubmit{
+    width: 8rem;
+    height: 2rem;
+    margin-left: 8rem;
+    font-size: 1.4rem;
+    border-radius: 16px;
+    background-color: blue;
+    color: #fff;
+}
+
+.container1{
+    border: blue solid 0.5rem;
+    width: 99%;
+    height: 95vh;
+    border-radius: 16px;
+    .blocks{
+        padding-top: 5rem;
+    }
+}
+a{
+    color: #000;
+}
+/*Google ICONS  STARTS here.*/
+
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+/*GOOGLE ICONS ENDS here.*/
+
+
+/*Container 1 STARTS here.*/
+
+nav{
+    display: flex;
+    margin:0.3rem ;
+    position: fixed;
+    background-color: blue;
+    border-radius: 16px;
+    height: 4.5rem;
+    width: 98.3%;
+    color: white;
+    .logo{
+        width: 16rem;
+        height: 5rem;
+        display: flex;
+        margin-top: 0.6rem;
+        padding-left: 1rem;
+        img{
+            height: 2.8rem;
+            width: 2rem;
+            padding-left: 1rem;
+        }
+        .text{
+            margin-top: 0.6rem;
+            margin-left: 1rem;
+        }
+    }
+    ul{
+        display: flex;
+        margin-left: 43rem;
+        padding-right: 1rem;
+        margin-top: 0.8rem;
+        li{
+            margin: 10px;
+            list-style: none;
+            a{
+                text-decoration: none;
+                color:white;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+
+/*Blocks*/
+.blocks{
+    display: flex;
+    width: 100%;
+    height: 75vh;
+    margin-top: 2.5rem;
+    .block1{
+        width: 50%;
+        margin-top: 7rem;
+        .texts{
+            margin-left: 7rem;
+            margin-top: -1.5rem;
+            .text1{
+                font-size: 50px;
+                width: 50rem;
+            }
+            .text2{
+                font-size: 45px;
+                margin-left: 2.2rem;
+                margin-top: 1rem;
+            }
+            button{
+                font-size: 2rem;
+                width: 10rem;
+                border-radius: 16px;
+                background-color: blue;
+                color: #fff;
+                margin-left: 8rem;
+                margin-top: 4rem;
+            }
+        }
+    }
+    .block2{
+        width: 50%;
+        margin-left: 5%;
+        img{
+            width: 38rem;
+            height: 25rem;
+        }
+    }
+}
+
+
+
+/*Container 2 STARTS here.*/
+
+
+.login_blocks{
+    margin-top:5rem;
+    width: 75%;
+    height: 75vh;
+    margin-left: 10rem;
+    border: 3.5px solid black;
+    border-radius: 16px;
+    .cross{
+        margin-top: 2.95rem;
+        margin-left: 5rem;
+        right: 50px;
+        font-size: 3rem;
+        height: 50px;
+        position: absolute;
+        padding-right: 9.5rem;
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
+}
+
+
+
+
+
+.block1{
+    padding-top: 0;
+    .container{
+        margin-top: 1.5rem;
+        margin-left: 0.75rem;
+        width: 29rem;
+        height: 24rem;
+        border: blue solid 5px;
+        border-radius: 16px;
+        .htext{
+            font-size: 35px;
+            margin-left: 11.5rem;
+            margin-top: 1.8rem;
+            width: 30rem;
+        }
+        .inputs{
+            margin-top: 2rem;
+            margin-left:1.8rem;
+            input{
+                width: 25rem;
+                height: 2rem;
+                margin-bottom: 1rem;
+                border-radius: 5px;
+            }
+        }
+
+
+        .extras{
+            display:flex;
+            margin-left: -2rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            h5{
+                padding-left: 5rem;
+            }
+        }
+
+        .buttons{
+            display: flex;
+            margin-left: 2.5rem;
+            button{
+                width: 9rem;
+                height: 2.2rem;
+                margin-left: 2rem;
+            }
+        }
+    }
+}
+
+.tblock2{
+    img{
+        width: 415px;
+        height: 23.5rem;
+        border-radius: 25px;
+        margin-left: 0.75rem;
+        margin-top: 2.5rem;
+    }
+}
+
+
+/*About section starts here*/
+
+#about{
+    border: blue solid 0.5rem;
+    border-radius: 16px;
+    width: 99%;
+    height: 95vh;
+}
+
+.about-blocks{
+    width: 100%;
+    margin: 5%;
+    display: flex;
+    background-color:blue;
+    border-radius: 25px;
+    margin-top: 5.5rem;
+    .about-block1{
+        width: 50%;
+        .heading{
+            text-align: center;
+            color: #fff;
+            margin-top: 2.5rem;
+            font-size: 3rem;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .documentation{
+            margin: 3rem;
+            color: #fff;
+            text-align: justify;
+        }
+    }
+    .about-block2{
+        width: 50%;
+        img{
+            width: 30rem;
+            height: 20rem;
+            margin-top: 4.5rem;
+            margin-left: 2rem;
+            padding-right: -5rem;
+            border: #000 0.3rem solid;
+            border-radius: 25px;
+        }
+    }
+}
+
+
+
+/*Contact section starts here*/
+
+.team{
+    margin-top:1rem ;
+    width: 99%;
+    height: 100vh;
+    border: blue 0.5rem solid;
+    border-radius: 16px;
+    .team-heading{
+        width: 50rem;
+        height: 10rem;
+        font-size: 3rem;
+        margin-left: 40%;
+        margin-top: 6rem;
+        font-family: 'Noto Sans', sans-serif;
+    }
+    .team-container{
+        background-color: blue;
+        height: 20rem;
+        width: 60rem;
+        margin-left: 12rem;
+        display: flex;
+        border-radius: 25px;
+        .member{
+            width: 20rem;
+            height: 18rem;
+            background-color: #fff;
+            margin: 1rem;
+            border-radius: 25px;
+            .banner{
+                margin-left: 4rem;
+                margin-top: 2rem;
+                border-radius: 25px;
+                .mem-img{
+                    margin-left: 1.25rem;
+                    img{
+                        border-radius: 25px;
+                        width: 8rem;
+                        height: 9rem;
+                    }
+                }
+                .mem-name{
+                    margin-left: 1rem;
+                    margin-top: 0.5rem;
+                }
+                .mem-position{
+                    margin-left: 2.5rem;
+                    margin-top: 0.5rem;
+                }
+                
+                .mem-email{
+                    margin-left: 0rem;
+                    margin-top: 0.5rem;
+                }
+                .mem-contact{
+                    margin-left: 1.25rem;
+                    margin-top: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+
+/*Footer STARTS Here*/
+
+
+
+
+/*Footer ENDS Here*/
