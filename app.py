@@ -176,7 +176,7 @@ def validate():
     userotp=request.form["eotp"]
     if otp== int(userotp):
         return redirect("/loggedin#step3")
-    return ("not verified , Please try again later")
+    return render_template("retry.html")
 
 
 #EmailOtp Validation Ends here

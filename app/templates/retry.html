@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Document Verification Portal</title>
+
+    <!-- CSS  -->
+    
+    <link href="{{url_for('static', filename='css/thank.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript">
+        windows.onload= load() {  
+            alert("Your Document has been Submitted please check your Email for further");
+        }  
+        
+    </script>
+    
+  </head>
+
+  <!-- CSS  -->
+</head>
+
+<body onload = "load()">
+  <!----Vaibhav -->
+<section >
+    <div class="container1">
+    <!----Navbar-->
+
+    <nav>
+        <div class="logo">
+            <div class="img">
+                <img src="{{url_for('static', filename='images/logo.png')}}">
+            </div>
+            <div class="text">
+                User Document
+                <br>
+                Verification Portal
+            </div>
+        </div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <!----Home-->
+    <div class="blocks">
+        <div class="block1">
+            <div class="texts">
+                <div class="text1">
+                    You Entered the wrong OTP
+                </div>
+                <div class="text2">
+                    Please check your Email and try again.
+                </div>
+                </div>
+            </div>
+        <div class="block2">
+            <img src="{{url_for('static', filename='images/1.png')}}">
+        </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!---------ABOUT SECTION BEGINS HERE---->
+
+      
+
+<!---FOOTER STARTS Here--->
+<!---FOOTER ENDS Here--->
+
+  </body>
+</html>
+
