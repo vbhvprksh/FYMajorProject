@@ -1,6 +1,6 @@
 body {
   background-color: #fff;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 section {
@@ -248,18 +248,32 @@ nav ul li a {
 
 /*Section 2 STARTS here.*/
 .upload {
-  font-size: 2rem;
-  margin-top: 1rem;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
   margin-left: 3rem;
 }
 
 .upload-btn {
   margin-left: 7.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+select {
+  border-radius: 1rem;
+  width: 7rem;
+  height: 1.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+p {
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
 
 .uploads {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: -3.5rem;
   margin-left: 3rem;
 }

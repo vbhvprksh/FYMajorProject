@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Loggedin</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{url_for('static', filename='css/loggedin.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    </head>
+    <body>
+
+
+<!---Stepping Page Ends here---->
+
+
+
+
+                <div class="blocks">
+                    <div class="block1" style="border: 2px solid #000;border-radius: 1rem; width: 55rem; height: 22rem;margin-left: 12rem; " >
+                        <div class="pan-details">
+                            <u>Please Upload your Aadhar</u>
+                        </div>
+                        <form action='/test1' method="post" enctype="multipart/form-data">
+                            <select name="plan" id="plan">
+                                <option value="vaibhav">vaibhav</option>
+                                <option value="vivek" selected>vivek </option>
+                                <option value="ved">ved</option>
+                                <option value="bandana">bandana</option>
+                                <option value="rahul">rahul</option>
+                            </select>
+                            <div class = "upload">
+                                <label ><b>Upload Pan Card Image</b></label><br>
+                                    <div class = "file-field">
+                                        <div>
+                                            <input type = "file" name="panfile" id="panfile"/ accept="image/*" title="Only images are allowed">
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="upload-btn">
+                                <button type="submit" class="check">Upload</button>
+                            </div>
+                        </form>
+                            <div class="accuracy" style="text-align: center; padding-top: 50px">
+                                <h5>{{pred}}</h5>
+                            </div>
+<!-----FORM2 Stars here----->
+                        
+
+                    </div>
+                    <!----Trial-->
+                    <!---Trial Ends-->
+                    <div class="block2">
+                        <img class="loggedimg" src="{{url_for('static', filename='images/loggedin.png')}}">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-----Section 4 Ends Here--->
+
+
+
+
+<!-----Section 2 Starts Here--->
+<!--Section 2 ENDS Here---->
+
+         <!--  Scripts-->
+  <script src="./static/js/materialize.js"></script>
+  <script type="text/javascript">
+    document.getElementById('file_upload').onchange = function () {
+      	document.getElementById('file_name').value = this.value.slice(12,100);
+    };
+  </script>
+
+
+        
+    </body>
+</html>

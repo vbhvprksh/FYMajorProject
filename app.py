@@ -3,7 +3,11 @@
 
 from cgitb import html
 from pydoc import doc
+from site import setquit
+from unittest import result
+from colorama import Cursor
 from django.shortcuts import render
+from sqlalchemy import func
 from app import app
 from flask import render_template,request,redirect,request
 import sqlite3
@@ -76,10 +80,9 @@ def registerpage():
 
 #Login Routes BEGIN
 
-
 @app.route("/login",methods=["POST"])
 def checklogin():
-    UN=request.form['username']
+    UN =request.form['username']
     PD=request.form['password']
     currentlocation= os.path.dirname(os.path.abspath(__file__))
     sqlconnection=sqlite3.connect(currentlocation + "\Login.db")
@@ -154,7 +157,13 @@ def verify():
         accessemail=request.form["accessemail"]
         print(accessemail)
         #Sql Query
-        
+        currentlocation= os.path.dirname(os.path.abspath(__file__))
+        sqlconnection=sqlite3.connect(currentlocation + "\Login.db")
+        cursor=sqlconnection.cursor()
+        query1="INSERT INTO Store VALUES('{e}')".format(e=accessemail)
+        cursor.execute(query1)
+        print("Data is inserted Successfully")
+        sqlconnection.commit()
         # Python code to create a file
         file = open('test.txt','w')
         file.write (accessemail)
@@ -189,7 +198,12 @@ def validate():
 
 # Adding path to config
 app.config['INITIAL_FILE_UPLOADS'] = 'app/static/uploads'
-app.config['EXISTNG_FILE'] = 'app/static/original'
+app.config['EXISTNG_FILE'] = 'app/static/original/'
+app.config['EXISTNG_FILE_bandana'] = 'app/static/original/bandana'
+app.config['EXISTNG_FILE_rahul'] = 'app/static/original/rahul'
+app.config['EXISTNG_FILE_vaibhav'] = 'app/static/original/vaibhav'
+app.config['EXISTNG_FILE_ved'] = 'app/static/original/ved'
+app.config['EXISTNG_FILE_vivek'] = 'app/static/original/vivek'
 app.config['GENERATED_FILE'] = 'app/static/generated'
 
 
@@ -220,8 +234,7 @@ mail=Mail(app)
 
 @app.route("/pan", methods=["GET", "POST"])
 def pan():
-
-	# Execute if request is get
+    	# Execute if request is get
 	if request.method == "GET":   
             return redirect("/loggedin#step3")
 
@@ -229,27 +242,25 @@ def pan():
 	
 
 	# Execute if reuqest is post
-	if request.method == "POST":
-                # Get uploaded image
-                file_uploadd = request.files['panfile']
-                filename = file_uploadd.filename
+	if request.method == "POST": 
+            options=request.form["plan"]
+            if options=="bandana":
+                file_upload = request.files['panfile']
+                filename = file_upload.filename
                 
                 # Resize and save the uploaded image
-                uploaded_image = Image.open(file_uploadd).resize((250,160))
-                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'image.jpg'))
-
+                uploaded_image = Image.open(file_upload).resize((250,160))
+                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                
                 # Resize and save the original image to ensure both uploaded and original matches in size
-                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE'], 'image.jpg')).resize((250,160))
-                original_image.save(os.path.join(app.config['EXISTNG_FILE'], 'image.jpg'))
-
+                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana.png')).resize((250,160))
+                original_image.save(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana.png'))
                 # Read uploaded and original image as array
-                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE'], 'image.jpg'))
-                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'image.jpg'))
-
+                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana.png'))
+                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
                 # Convert image into grayscale
                 original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
                 uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
-
                 # Calculate structural similarity
                 (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
                 diff = (diff * 255).astype("uint8")
@@ -258,11 +269,13 @@ def pan():
                 thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
                 cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
                 cnts = imutils.grab_contours(cnts)
+                
                 # Draw contours on image
                 for c in cnts:
                     (x, y, w, h) = cv2.boundingRect(c)
                     cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
                     cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
                 # Save all output images (if required)
                 cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
                 cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
@@ -274,20 +287,259 @@ def pan():
                 file = open("test.txt", "r")
                 pan_variable=(str(file.read()))
                 print(pan_variable)
+                if (pred>"90%"):
+                        pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(pan_msg)
 
-                if (pred>"75%"):
+                    
+                if (pred<"90%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Congratulation Your Document has been Verified sucessfully. Thank you for using our Document verification Portal hope you liked it though. And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ pred + "Thank you for Visiting our Portal once again.")
+                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
                     with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                         pan_msg.attach("doc_verificaion.png","image/png",fp.read())
-                    mail.send(pan_msg)
-                else:
+                    mail.send(pan_msg) 
+
+            if options=="rahul":
+                file_upload = request.files['panfile']
+                filename = file_upload.filename
+                
+                # Resize and save the uploaded image
+                uploaded_image = Image.open(file_upload).resize((250,160))
+                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                
+                # Resize and save the original image to ensure both uploaded and original matches in size
+                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_rahul'], 'rahul.png')).resize((250,160))
+                original_image.save(os.path.join(app.config['EXISTNG_FILE_rahul'], 'rahul.png'))
+                # Read uploaded and original image as array
+                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_rahul'], 'rahul.png'))
+                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                # Convert image into grayscale
+                original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+                # Calculate structural similarity
+                (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                diff = (diff * 255).astype("uint8")
+
+                # Calculate threshold and contours
+                thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cnts = imutils.grab_contours(cnts)
+                
+                # Draw contours on image
+                for c in cnts:
+                    (x, y, w, h) = cv2.boundingRect(c)
+                    cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                # Save all output images (if required)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                pred=str(round(score*100,2)) + '%' + ' correct'
+
+                # Python code to illustrate read() mode
+                file = open("test.txt", "r")
+                pan_variable=(str(file.read()))
+                print(pan_variable)
+                if (pred>"90%"):
+                        pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(pan_msg)
+
+                    
+                if (pred<"90%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Your Document has not been Verified. Thank you for using our Document verification Portal hope you liked it though.Please Do not use this tampered document anywhere And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ pred + "Thank you for Visiting our Portal once again.")
+                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
                     with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                         pan_msg.attach("doc_verificaion.png","image/png",fp.read())
-                    mail.send(pan_msg)
-                return redirect("/loggedin#step4")
+                    mail.send(pan_msg) 
+
+            if options=="vaibhav":
+                file_upload = request.files['panfile']
+                filename = file_upload.filename
+                
+                # Resize and save the uploaded image
+                uploaded_image = Image.open(file_upload).resize((250,160))
+                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                
+                # Resize and save the original image to ensure both uploaded and original matches in size
+                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_vaibhav'], 'vaibhav.png')).resize((250,160))
+                original_image.save(os.path.join(app.config['EXISTNG_FILE_vaibhav'], 'vaibhav.png'))
+                # Read uploaded and original image as array
+                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_vaibhav'], 'vaibhav.png'))
+                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                # Convert image into grayscale
+                original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+                # Calculate structural similarity
+                (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                diff = (diff * 255).astype("uint8")
+
+                # Calculate threshold and contours
+                thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cnts = imutils.grab_contours(cnts)
+                
+                # Draw contours on image
+                for c in cnts:
+                    (x, y, w, h) = cv2.boundingRect(c)
+                    cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                # Save all output images (if required)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                pred=str(round(score*100,2)) + '%' + ' correct'
+
+                # Python code to illustrate read() mode
+                file = open("test.txt", "r")
+                pan_variable=(str(file.read()))
+                print(pan_variable)
+                if (pred>"90%"):
+                        pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        pan_msg.body=str("Dear"+ "" + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(pan_msg)
+
+                    
+                if (pred<"90%"):
+                    pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                        pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                    mail.send(pan_msg) 
+
+            if options=="ved":
+                file_upload = request.files['panfile']
+                filename = file_upload.filename
+                
+                # Resize and save the uploaded image
+                uploaded_image = Image.open(file_upload).resize((250,160))
+                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                
+                # Resize and save the original image to ensure both uploaded and original matches in size
+                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_ved'], 'ved.png')).resize((250,160))
+                original_image.save(os.path.join(app.config['EXISTNG_FILE_ved'], 'ved.png'))
+                # Read uploaded and original image as array
+                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_ved'], 'ved.png'))
+                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                # Convert image into grayscale
+                original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+                # Calculate structural similarity
+                (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                diff = (diff * 255).astype("uint8")
+
+                # Calculate threshold and contours
+                thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cnts = imutils.grab_contours(cnts)
+                
+                # Draw contours on image
+                for c in cnts:
+                    (x, y, w, h) = cv2.boundingRect(c)
+                    cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                # Save all output images (if required)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                pred=str(round(score*100,2)) + '%' + ' correct'
+
+                # Python code to illustrate read() mode
+                file = open("test.txt", "r")
+                pan_variable=(str(file.read()))
+                print(pan_variable)
+                if (pred>"90%"):
+                        pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(pan_msg)
+
+                    
+                if (pred<"90%"):
+                    pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                        pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                    mail.send(pan_msg) 
+
+            if options=="vivek":
+                file_upload = request.files['panfile']
+                filename = file_upload.filename
+                
+                # Resize and save the uploaded image
+                uploaded_image = Image.open(file_upload).resize((250,160))
+                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                
+                # Resize and save the original image to ensure both uploaded and original matches in size
+                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_vivek'], 'vivek.png')).resize((250,160))
+                original_image.save(os.path.join(app.config['EXISTNG_FILE_vivek'], 'vivek.png'))
+                # Read uploaded and original image as array
+                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_vivek'], 'vivek.png'))
+                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                # Convert image into grayscale
+                original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+                # Calculate structural similarity
+                (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                diff = (diff * 255).astype("uint8")
+
+                # Calculate threshold and contours
+                thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cnts = imutils.grab_contours(cnts)
+                
+                # Draw contours on image
+                for c in cnts:
+                    (x, y, w, h) = cv2.boundingRect(c)
+                    cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                # Save all output images (if required)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                pred=str(round(score*100,2)) + '%' + ' correct'
+
+                # Python code to illustrate read() mode
+                file = open("test.txt", "r")
+                pan_variable=(str(file.read()))
+                print(pan_variable)
+                if (pred>"90%"):
+                        pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(pan_msg)
+
+                    
+                if (pred<"90%"):
+                    pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                        pan_msg.attach("doc_verificaion.png","image/png",fp.read())
+                    mail.send(pan_msg) 
+
+
+
+
+
+            #place of last returning
+            return redirect("/loggedin#step4")
 
 
 #Aadhar Card SSIM
@@ -301,69 +553,153 @@ def aadhar():
 
         # Execute if reuqest is post
         if request.method == "POST":
+
                     # Get uploaded image
-                    file_upload = request.files['file_uploadd']
-                    filename = file_upload.filename
-                    
-                    # Resize and save the uploaded image
-                    uploaded_image = Image.open(file_upload).resize((250,160))
-                    uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.jpg'))
+                file_upload = request.files['file_uploadd']
+                filename = file_upload.filename
+                
+                # Resize and save the uploaded image
+                uploaded_image = Image.open(file_upload).resize((250,160))
+                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.jpg'))
 
                     # Resize and save the original image to ensure both uploaded and original matches in size
-                    original_image = Image.open(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg')).resize((250,160))
-                    original_image.save(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg'))
+                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg')).resize((250,160))
+                original_image.save(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg'))
 
                     # Read uploaded and original image as array
-                    original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg'))
-                    uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.jpg'))
+                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg'))
+                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.jpg'))
 
                     # Convert image into grayscale
-                    original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
-                    uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+                original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
 
                     # Calculate structural similarity
-                    (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
-                    diff = (diff * 255).astype("uint8")
+                (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                diff = (diff * 255).astype("uint8")
 
                     # Calculate threshold and contours
-                    thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
-                    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-                    cnts = imutils.grab_contours(cnts)
+                thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cnts = imutils.grab_contours(cnts)
                     
                     # Draw contours on image
-                    for c in cnts:
-                        (x, y, w, h) = cv2.boundingRect(c)
-                        cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-                        cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                for c in cnts:
+                    (x, y, w, h) = cv2.boundingRect(c)
+                    cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
                     # Save all output images (if required)
-                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
-                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
-                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
-                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
-                    predd=str(round(score*100,2)) + '%' + ' correct'
-                    file = open("test.txt", "r")
-                    pan_variable=(str(file.read()))
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                predd=str(round(score*100,2)) + '%' + ' correct'
+                file = open("test.txt", "r")
+                pan_variable=(str(file.read()))
                     
-                    print(pan_variable)
+                print(pan_variable)
                     
-                    if (predd>"75%"):
-                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        aadhar_msg.body=str("Congratulation Your Document has been Verified sucessfully. Thank you for using our Document verification Portal hope you liked it though. And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ predd + "Thank you for Visiting our Portal once again.")
-                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
-                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
-                        mail.send(aadhar_msg)
-                    else:
-                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        aadhar_msg.body=str("Your Document has not been Verified. Thank you for using our Document verification Portal hope you liked it though.Please Do not use this tampered document anywhere And we would like to tell you that Our Model has an accuracy of 80 % and Accuracy of your Document is "+ predd + "Thank you for Visiting our Portal once again.")
-                            
-                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
-                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
-                        mail.send(aadhar_msg)
+                    #TEST
+                if (predd>"95%"):
+                    aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                    aadhar_msg.body=str("Dear User,Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd  )
+                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                        aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                    mail.send(aadhar_msg)
+
+                    
+                if (predd<"95%"):
+                    aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                    aadhar_msg.body=str("Dear User,Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd )
+                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                        aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                    mail.send(aadhar_msg) 
+
+
+
                     return render_template("/thankyou.html")
 
+###Testing new thing
+
+@app.route("/try")
+def tryy():
+    return render_template("try.html")
 
 
+
+currentlocation= os.path.dirname(os.path.abspath(__file__))
+sqlconnection=sqlite3.connect(currentlocation + "\Login.db")
+cursor=sqlconnection.cursor()
+sql="select Username from Users"
+cursor.execute(sql)
+results=[]
+results=cursor.fetchall()
+strip1 = str(results[0]).lstrip("('").rstrip("',)")
+strip2 = str(results[1]).lstrip("('").rstrip("',)")
+strip3 = str(results[2]).lstrip("('").rstrip("',)")
+strip4 = str(results[3]).lstrip("('").rstrip("',)")
+strip5 = str(results[4]).lstrip("('").rstrip("',)")
+    
+
+
+
+
+@app.route("/test1", methods=["GET", "POST"])
+def test1():
+
+	# Execute if request is get
+	if request.method == "GET":   
+            return redirect("/loggedin#step3")
+
+            
+	
+
+	# Execute if reuqest is post
+	if request.method == "POST": 
+            options=request.form["plan"]
+            if options=="bandana":
+                file_upload = request.files['panfile']
+                filename = file_upload.filename
+                
+                # Resize and save the uploaded image
+                uploaded_image = Image.open(file_upload).resize((250,160))
+                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                
+                # Resize and save the original image to ensure both uploaded and original matches in size
+                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana.png')).resize((250,160))
+                original_image.save(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana.png'))
+                # Read uploaded and original image as array
+                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana.png'))
+                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'pan.png'))
+                # Convert image into grayscale
+                original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+                # Calculate structural similarity
+                (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                diff = (diff * 255).astype("uint8")
+
+                # Calculate threshold and contours
+                thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cnts = imutils.grab_contours(cnts)
+                
+                # Draw contours on image
+                for c in cnts:
+                    (x, y, w, h) = cv2.boundingRect(c)
+                    cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                # Save all output images (if required)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                pred=str(round(score*100,2)) + '%' + ' correct'
+                return (pred)
+
+
+    #Testing Database
 
 
 

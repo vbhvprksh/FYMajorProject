@@ -29,7 +29,7 @@
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
-                        <li><a href="#">Conatct</a></li>
+                        <li><a href="#">Contact</a></li>
                         <a href="/login"><button style="color:blue;">Logout</button></a>
                     </ul>
                 </nav>
@@ -123,7 +123,7 @@
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Conatct</a></li>
+                <li><a href="#">Contact</a></li>
                 <a href="/login"><button style="color:blue;">Logout</button></a>
             </ul>
         </nav>
@@ -203,7 +203,7 @@
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
-                        <li><a href="#">Conatct</a></li>
+                        <li><a href="#">Contact</a></li>
                         <a href="/login"><button style="color:blue;">Logout</button></a>
                     </ul>
                 </nav>
@@ -242,9 +242,19 @@
                         </div>
                         <form action='/pan' method="post" enctype="multipart/form-data">
                             <div class = "upload">
-                                <label ><b>Upload Pan Card Image</b></label><br>
+                                    
+                                <label ><b>Upload your PAN card</b></label><br>
+                                <label class="last" style="font-size:18px;padding-top: 0px;"><p><u>Confirm Username and Upload file</u></p></label>
                                     <div class = "file-field">
                                         <div>
+                                            <select name="plan" id="plan">
+                                                <option selected>Confirm User </option>
+                                                <option value="vaibhav">vaibhav</option>
+                                                <option value="vivek">vivek </option>
+                                                <option value="ved">ved</option>
+                                                <option value="bandana">bandana</option>
+                                                <option value="rahul">rahul</option>
+                                            </select>
                                             <input type = "file" name="panfile" id="panfile"/>
                                         </div>
                                     </div>
@@ -306,7 +316,7 @@
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
-                        <li><a href="#">Conatct</a></li>
+                        <li><a href="#">Contact</a></li>
                         <a href="/login"><button style="color:blue;">Logout</button></a>
                     </ul>
                 </nav>
@@ -363,7 +373,16 @@
                         <form action='/aadhar' method="post" class="col s12" enctype="multipart/form-data">
                             <div class = "uploads">
                                 <label for="first_name"><b>Upload Aadhar Card Image</b></label><br>
+                                <label class="last" style="font-size:18px;padding-top: 0px;"><p><u>Confirm Username and Upload file</u></p></label>
                                 <div class = "file-field input-field">
+                                    <select name="aadharp" id="plan">
+                                        <option selected>Confirm User </option>
+                                        <option value="vaibhav">vaibhav</option>
+                                        <option value="vivek">vivek </option>
+                                        <option value="ved">ved</option>
+                                        <option value="bandana">bandana</option>
+                                        <option value="rahul">rahul</option>
+                                    </select>
                                             <input type = "file" accept="image/*" title="Only images are allowed" name="file_uploadd" id="file_uploadd" />
                                 </div>
                             </div>
@@ -371,10 +390,7 @@
                                 <button type="submit" class="check">Next</button>
                                 </div>
                         </form>
-                                <div style="text-align: center; padding-top: 50px">
-                                    <h5>{{predd}}</h5>
-                                </div>
-
+                                
 
                     </div>
                     <!----Trial-->
