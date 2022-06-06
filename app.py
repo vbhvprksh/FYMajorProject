@@ -90,10 +90,26 @@ def checklogin():
     query1="SELECT Username,Password from Users WHERE Username= '{un}' AND Password= '{pw}' ".format(un=UN,pw=PD)
     rows = cursor.execute(query1)
     rows=rows.fetchall()
+    
+    #Txt query lines
+    
+    # Python code to create a file
+    file = open('user.txt','w')
+    file.write (UN)
+    file.close()
+
+
     if len(rows) ==1:
         return render_template("loggedin.html")
     else:
         return redirect("/register")
+
+
+
+
+
+
+
 
 
 #Login Routes End
@@ -164,6 +180,7 @@ def verify():
         cursor.execute(query1)
         print("Data is inserted Successfully")
         sqlconnection.commit()
+
         # Python code to create a file
         file = open('test.txt','w')
         file.write (accessemail)
@@ -211,6 +228,12 @@ with open('config.json','r') as f:
     params=json.load(f)['param']
 
 
+
+
+
+
+
+
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT']=465
 app.config['MAIL_USERNAME']=params['gmail-user']
@@ -243,8 +266,13 @@ def pan():
 
 	# Execute if reuqest is post
 	if request.method == "POST": 
-            options=request.form["plan"]
-            if options=="bandana":
+            # Python code to illustrate read() mode
+            file = open("user.txt", "r")
+            ousers=(str(file.read()))
+            print(ousers)
+                
+
+            if ousers=="bandana":
                 file_upload = request.files['panfile']
                 filename = file_upload.filename
                 
@@ -289,7 +317,7 @@ def pan():
                 print(pan_variable)
                 if (pred>"90%"):
                         pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        pan_msg.body=str("Dear"+ " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
                         with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                             pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                         mail.send(pan_msg)
@@ -297,12 +325,12 @@ def pan():
                     
                 if (pred<"90%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    pan_msg.body=str("Dear" " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
                     with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                         pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                     mail.send(pan_msg) 
 
-            if options=="rahul":
+            if ousers=="rahul":
                 file_upload = request.files['panfile']
                 filename = file_upload.filename
                 
@@ -347,7 +375,7 @@ def pan():
                 print(pan_variable)
                 if (pred>"90%"):
                         pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        pan_msg.body=str("Dear"+ " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
                         with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                             pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                         mail.send(pan_msg)
@@ -355,12 +383,12 @@ def pan():
                     
                 if (pred<"90%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    pan_msg.body=str("Dear" " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
                     with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                         pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                     mail.send(pan_msg) 
 
-            if options=="vaibhav":
+            if ousers=="vaibhav":
                 file_upload = request.files['panfile']
                 filename = file_upload.filename
                 
@@ -405,7 +433,7 @@ def pan():
                 print(pan_variable)
                 if (pred>"90%"):
                         pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        pan_msg.body=str("Dear"+ "" + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  + ".")
+                        pan_msg.body=str("Dear"+ "" + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  + ".")
                         with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                             pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                         mail.send(pan_msg)
@@ -413,12 +441,12 @@ def pan():
                     
                 if (pred<"90%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    pan_msg.body=str("Dear" " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
                     with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                         pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                     mail.send(pan_msg) 
 
-            if options=="ved":
+            if ousers=="ved":
                 file_upload = request.files['panfile']
                 filename = file_upload.filename
                 
@@ -463,7 +491,7 @@ def pan():
                 print(pan_variable)
                 if (pred>"90%"):
                         pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        pan_msg.body=str("Dear"+ " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
                         with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                             pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                         mail.send(pan_msg)
@@ -471,12 +499,12 @@ def pan():
                     
                 if (pred<"90%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    pan_msg.body=str("Dear" " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
                     with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                         pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                     mail.send(pan_msg) 
 
-            if options=="vivek":
+            if ousers=="vivek":
                 file_upload = request.files['panfile']
                 filename = file_upload.filename
                 
@@ -519,9 +547,10 @@ def pan():
                 file = open("test.txt", "r")
                 pan_variable=(str(file.read()))
                 print(pan_variable)
+
                 if (pred>"90%"):
                         pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                        pan_msg.body=str("Dear"+ " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
+                        pan_msg.body=str("Dear"+ " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred  )
                         with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                             pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                         mail.send(pan_msg)
@@ -529,7 +558,7 @@ def pan():
                     
                 if (pred<"90%"):
                     pan_msg = Message("Pan Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    pan_msg.body=str("Dear" " " + options+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
+                    pan_msg.body=str("Dear" " " + ousers+",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + pred )
                     with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
                         pan_msg.attach("doc_verificaion.png","image/png",fp.read())
                     mail.send(pan_msg) 
@@ -554,71 +583,329 @@ def aadhar():
         # Execute if reuqest is post
         if request.method == "POST":
 
-                    # Get uploaded image
-                file_upload = request.files['file_uploadd']
-                filename = file_upload.filename
+                # Python code to illustrate read() mode
+                file = open("user.txt", "r")
+                ousers=(str(file.read()))
+                print(ousers)
                 
-                # Resize and save the uploaded image
-                uploaded_image = Image.open(file_upload).resize((250,160))
-                uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.jpg'))
-
-                    # Resize and save the original image to ensure both uploaded and original matches in size
-                original_image = Image.open(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg')).resize((250,160))
-                original_image.save(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg'))
-
-                    # Read uploaded and original image as array
-                original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE'], 'aadhar.jpg'))
-                uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.jpg'))
-
-                    # Convert image into grayscale
-                original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
-                uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
-
-                    # Calculate structural similarity
-                (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
-                diff = (diff * 255).astype("uint8")
-
-                    # Calculate threshold and contours
-                thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
-                cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-                cnts = imutils.grab_contours(cnts)
+                if ousers=="bandana":
+                    # Get uploaded image
+                    file_upload = request.files['file_uploadd']
+                    filename = file_upload.filename
                     
-                    # Draw contours on image
-                for c in cnts:
-                    (x, y, w, h) = cv2.boundingRect(c)
-                    cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-                    cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    # Resize and save the uploaded image
+                    uploaded_image = Image.open(file_upload).resize((250,160))
+                    uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
 
-                    # Save all output images (if required)
-                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
-                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
-                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
-                cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
-                predd=str(round(score*100,2)) + '%' + ' correct'
-                file = open("test.txt", "r")
-                pan_variable=(str(file.read()))
+                        # Resize and save the original image to ensure both uploaded and original matches in size
+                    original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana_aadhar.png')).resize((250,160))
+                    original_image.save(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana_aadhar.png'))
+
+                        # Read uploaded and original image as array
+                    original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_bandana'], 'bandana_aadhar.png'))
+                    uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Convert image into grayscale
+                    original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                    uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+
+                        # Calculate structural similarity
+                    (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                    diff = (diff * 255).astype("uint8")
+
+                        # Calculate threshold and contours
+                    thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    cnts = imutils.grab_contours(cnts)
+                        
+                        # Draw contours on image
+                    for c in cnts:
+                        (x, y, w, h) = cv2.boundingRect(c)
+                        cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                        cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                        # Save all output images (if required)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                    predd=str(round(score*100,2)) + '%' + ' correct'
+                    file = open("test.txt", "r")
+                    pan_variable=(str(file.read()))
+                        
+                    print(pan_variable)
+                        
+                        #TEST
+                    if (predd>"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg)
+
+                        
+                    if (predd<"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg) 
+
+                if ousers=="vaibhav":
+                    # Get uploaded image
+                    file_upload = request.files['file_uploadd']
+                    filename = file_upload.filename
                     
-                print(pan_variable)
+                    # Resize and save the uploaded image
+                    uploaded_image = Image.open(file_upload).resize((250,160))
+                    uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Resize and save the original image to ensure both uploaded and original matches in size
+                    original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_vaibhav'], 'vaibhav_aadhar.png')).resize((250,160))
+                    original_image.save(os.path.join(app.config['EXISTNG_FILE_vaibhav'], 'vaibhav_aadhar.png'))
+
+                        # Read uploaded and original image as array
+                    original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_vaibhav'], 'vaibhav_aadhar.png'))
+                    uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Convert image into grayscale
+                    original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                    uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+
+                        # Calculate structural similarity
+                    (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                    diff = (diff * 255).astype("uint8")
+
+                        # Calculate threshold and contours
+                    thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    cnts = imutils.grab_contours(cnts)
+                        
+                        # Draw contours on image
+                    for c in cnts:
+                        (x, y, w, h) = cv2.boundingRect(c)
+                        cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                        cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                        # Save all output images (if required)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                    predd=str(round(score*100,2)) + '%' + ' correct'
+                    file = open("test.txt", "r")
+                    pan_variable=(str(file.read()))
+                        
+                    print(pan_variable)
+                        
+                        #TEST
+                    if (predd>"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg)
+
+                        
+                    if (predd<"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg) 
+
+                if ousers=="rahul":
+                    # Get uploaded image
+                    file_upload = request.files['file_uploadd']
+                    filename = file_upload.filename
                     
-                    #TEST
-                if (predd>"95%"):
-                    aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    aadhar_msg.body=str("Dear User,Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd  )
-                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
-                        aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
-                    mail.send(aadhar_msg)
+                    # Resize and save the uploaded image
+                    uploaded_image = Image.open(file_upload).resize((250,160))
+                    uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
 
+                        # Resize and save the original image to ensure both uploaded and original matches in size
+                    original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_rahul'], 'rahul_aadhar.png')).resize((250,160))
+                    original_image.save(os.path.join(app.config['EXISTNG_FILE_rahul'], 'rahul_aadhar.png'))
+
+                        # Read uploaded and original image as array
+                    original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_rahul'], 'rahul_aadhar.png'))
+                    uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Convert image into grayscale
+                    original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                    uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+
+                        # Calculate structural similarity
+                    (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                    diff = (diff * 255).astype("uint8")
+
+                        # Calculate threshold and contours
+                    thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    cnts = imutils.grab_contours(cnts)
+                        
+                        # Draw contours on image
+                    for c in cnts:
+                        (x, y, w, h) = cv2.boundingRect(c)
+                        cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                        cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                        # Save all output images (if required)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                    predd=str(round(score*100,2)) + '%' + ' correct'
+                    file = open("test.txt", "r")
+                    pan_variable=(str(file.read()))
+                        
+                    print(pan_variable)
+                        
+                        #TEST
+                    if (predd>"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg)
+
+                        
+                    if (predd<"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg) 
+
+                if ousers=="ved":
+                    # Get uploaded image
+                    file_upload = request.files['file_uploadd']
+                    filename = file_upload.filename
                     
-                if (predd<"95%"):
-                    aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
-                    aadhar_msg.body=str("Dear User,Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd )
-                    with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
-                        aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
-                    mail.send(aadhar_msg) 
+                    # Resize and save the uploaded image
+                    uploaded_image = Image.open(file_upload).resize((250,160))
+                    uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Resize and save the original image to ensure both uploaded and original matches in size
+                    original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_ved'], 'ved_aadhar.png')).resize((250,160))
+                    original_image.save(os.path.join(app.config['EXISTNG_FILE_ved'], 'ved_aadhar.png'))
+
+                        # Read uploaded and original image as array
+                    original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_ved'], 'ved_aadhar.png'))
+                    uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Convert image into grayscale
+                    original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                    uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+
+                        # Calculate structural similarity
+                    (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                    diff = (diff * 255).astype("uint8")
+
+                        # Calculate threshold and contours
+                    thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    cnts = imutils.grab_contours(cnts)
+                        
+                        # Draw contours on image
+                    for c in cnts:
+                        (x, y, w, h) = cv2.boundingRect(c)
+                        cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                        cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                        # Save all output images (if required)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                    predd=str(round(score*100,2)) + '%' + ' correct'
+                    file = open("test.txt", "r")
+                    pan_variable=(str(file.read()))
+                        
+                    print(pan_variable)
+                        
+                        #TEST
+                    if (predd>"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + "." )
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg)
+
+                        
+                    if (predd<"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + "." )
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg) 
+
+                if ousers=="vivek":
+                    # Get uploaded image
+                    file_upload = request.files['file_uploadd']
+                    filename = file_upload.filename
+                    
+                    # Resize and save the uploaded image
+                    uploaded_image = Image.open(file_upload).resize((250,160))
+                    uploaded_image.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Resize and save the original image to ensure both uploaded and original matches in size
+                    original_image = Image.open(os.path.join(app.config['EXISTNG_FILE_vivek'], 'vivek_aadhar.png')).resize((250,160))
+                    original_image.save(os.path.join(app.config['EXISTNG_FILE_vivek'], 'vivek_aadhar.png'))
+
+                        # Read uploaded and original image as array
+                    original_image = cv2.imread(os.path.join(app.config['EXISTNG_FILE_vivek'], 'vivek_aadhar.png'))
+                    uploaded_image = cv2.imread(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'aadhar.png'))
+
+                        # Convert image into grayscale
+                    original_gray = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+                    uploaded_gray = cv2.cvtColor(uploaded_image, cv2.COLOR_BGR2GRAY)
+
+                        # Calculate structural similarity
+                    (score, diff) = structural_similarity(original_gray, uploaded_gray, full=True)
+                    diff = (diff * 255).astype("uint8")
+
+                        # Calculate threshold and contours
+                    thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+                    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    cnts = imutils.grab_contours(cnts)
+                        
+                        # Draw contours on image
+                    for c in cnts:
+                        (x, y, w, h) = cv2.boundingRect(c)
+                        cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                        cv2.rectangle(uploaded_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+                        # Save all output images (if required)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_original.jpg'), original_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_uploaded.jpg'), uploaded_image)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_diff.jpg'), diff)
+                    cv2.imwrite(os.path.join(app.config['GENERATED_FILE'], 'image_thresh.jpg'), thresh)
+                    predd=str(round(score*100,2)) + '%' + ' correct'
+                    file = open("test.txt", "r")
+                    pan_variable=(str(file.read()))
+                        
+                    print(pan_variable)
+                        
+                        #TEST
+                    if (predd>"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg)
+
+                        
+                    if (predd<"95%"):
+                        aadhar_msg = Message("Aadhar Doc Verification",sender="vbhvprksh@gmail.com",recipients=[pan_variable])
+                        aadhar_msg.body=str("Dear"+ " " + ousers+ ",Congratulation Your Document has been Submitted sucessfully.As per our records your document has the accuracy of" + predd + ".")
+                        with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/poster.png") as fp:
+                            aadhar_msg.attach("doc_verificaion.png","image/png",fp.read())
+                        mail.send(aadhar_msg) 
 
 
 
-                    return render_template("/thankyou.html")
+                return render_template("/thankyou.html")
 
 ###Testing new thing
 
@@ -700,6 +987,9 @@ def test1():
 
 
     #Testing Database
+
+
+
 
 
 
