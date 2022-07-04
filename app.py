@@ -153,17 +153,26 @@ def logged():
 
 #EmailOtp Validation Starts here
 
-with open('config.json','r') as f:
-    params=json.load(f)['param']
 
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT']=465
-app.config['MAIL_USERNAME']=params['gmail-user']
-app.config['MAIL_PASSWORD']=params['gmail-password']
+
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT']=2525
+app.config['MAIL_USERNAME']='ce57266cab3bdb'
+app.config['MAIL_PASSWORD']='9647eb187fe36e'
 app.config['MAIL_USE_TLS']=False
-app.config['MAIL_USE_SSL']=True
+app.config['MAIL_USE_SSL']=False
 mail=Mail(app)
+
+
+#app.config['MAIL_SERVER']='smtp.mail.yahoo.com'
+#app.config['MAIL_PORT']=465
+#app.config['MAIL_USERNAME']='vash379@yahoo.com'
+#app.config['MAIL_PASSWORD']= 'APPmail@123'
+#app.config['MAIL_USE_TLS']=True
+#app.config['MAIL_USE_SSL']=False
+#mail=Mail(app)
+
 
 otp=randint(000000,999999)
 
@@ -187,7 +196,8 @@ def verify():
         file.close()
 
         #Flask_Mail
-        msg = Message("OTP Verification",sender="vbhvprksh@gmail.com",recipients=[accessemail])
+        print(otp)
+        msg = Message("OTP Verification",sender="9647eb187fe36e",recipients=[accessemail])
         msg.body=("Welcome to Automated Document Verification Portal.Your Otp for Verification is" +" " + str(otp) + " " +"It is valid for next 5 mins.")
         with app.open_resource("C:/Users/Vaibhav Prakash/Desktop/main/app/static/email/otp.png") as fp:
             msg.attach("doc_verificaion.png","image/png",fp.read())
@@ -224,8 +234,6 @@ app.config['EXISTNG_FILE_vivek'] = 'app/static/original/vivek'
 app.config['GENERATED_FILE'] = 'app/static/generated'
 
 
-with open('config.json','r') as f:
-    params=json.load(f)['param']
 
 
 
@@ -234,21 +242,26 @@ with open('config.json','r') as f:
 
 
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT']=465
-app.config['MAIL_USERNAME']=params['gmail-user']
-app.config['MAIL_PASSWORD']=params['gmail-password']
+
+
+
+
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT']=2525
+app.config['MAIL_USERNAME']='ce57266cab3bdb'
+app.config['MAIL_PASSWORD']='9647eb187fe36e'
 app.config['MAIL_USE_TLS']=False
-app.config['MAIL_USE_SSL']=True
+app.config['MAIL_USE_SSL']=False
 mail=Mail(app)
 
 
-
-
-
-
-
-
+#app.config['MAIL_SERVER']='smtp.mail.yahoo.com'
+#app.config['MAIL_PORT']=587
+#app.config['MAIL_USERNAME']='vash379@yahoo.com'
+#app.config['MAIL_PASSWORD']= 'APPmail@123'
+#app.config['MAIL_USE_TLS']=True
+#app.config['MAIL_USE_SSL']=False
+#mail=Mail(app)
 
 
 
